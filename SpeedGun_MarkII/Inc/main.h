@@ -58,6 +58,9 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define JOY_centre_Pin GPIO_PIN_0
+#define JOY_centre_GPIO_Port GPIOA
+#define JOY_centre_EXTI_IRQn EXTI0_IRQn
 #define LED_red_Pin GPIO_PIN_2
 #define LED_red_GPIO_Port GPIOB
 #define LED_green_Pin GPIO_PIN_8

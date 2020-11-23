@@ -147,7 +147,14 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if(JOY_centre_Pin==GPIO_Pin)
+	{
+		HAL_GPIO_TogglePin(LED_red_GPIO_Port,LED_red_Pin);
+	}
+	return;
+}
 /* USER CODE END 4 */
 
 /**
