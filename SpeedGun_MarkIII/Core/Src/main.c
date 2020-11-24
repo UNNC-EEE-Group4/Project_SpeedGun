@@ -32,6 +32,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
+#include "display.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -110,6 +111,8 @@ int main(void) {
 	//BSP_LCD_GLASS_DisplayString("test");
 	HAL_TIM_Base_Start_IT(&htim3);
 
+	//user interface
+	gui();
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
