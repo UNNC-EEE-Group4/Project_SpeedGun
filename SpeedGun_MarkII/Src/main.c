@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -29,6 +30,13 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+//adding
+long count=0;
+long ct=0;
+long t=0;
+int flag=1;
+int highv=0;
+int f=0;
 
 /* USER CODE END PTD */
 
@@ -86,10 +94,10 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_TIM3_Init();
+  MX_TIM1_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_2,GPIO_PIN_RESET);
-  HAL_TIM_Base_Start_IT(&htim3);
+  HAL_TIM_Base_Start_IT(&htim1);//ADDING
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -111,6 +119,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -118,11 +127,11 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
-  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_7;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
   RCC_OscInitStruct.PLL.PLLM = 1;
-  RCC_OscInitStruct.PLL.PLLN = 40;
+  RCC_OscInitStruct.PLL.PLLN = 20;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
@@ -143,6 +152,12 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2;
+  PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /** Configure the main internal regulator output voltage
   */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
@@ -152,13 +167,55 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+//ADDING
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if(JOY_centre_Pin==GPIO_Pin)
-	{
-		HAL_GPIO_TogglePin(LED_red_GPIO_Port,LED_red_Pin);
+	if(htim == &htim1) {
+		//1ms trigger
+		count++;
+		//HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_7);
+
 	}
-	return;
+}
+
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_PIN)
+{
+	/*if(GPIO_PIN == GPIO_PIN_0) {
+
+		if(flag == 1)
+	{
+				//1ms trigger
+			ct=count;
+			}
+
+	    if(flag == 2)
+	{
+			//1ms trigger
+		t=count-ct;
+		//t ms unit
+		uint8_t tim[]="             ms \n";
+		sprintf(tim,"%l",t);
+		HAL_UART_Transmit(&huart2, tim, sizeof(tim), 1000);
+		}
+	}*/
+
+	if(GPIO_PIN == GPIO_PIN_6) {
+
+		highv++;
+		if(count % 10 == 0)
+							{
+							f=highv;
+
+							uint8_t freq[]="             Hz. \n";
+									sprintf(freq,"%l",f);
+									HAL_UART_Transmit(&huart2, freq, sizeof(freq), 1000);
+
+							highv=0;
+							}
+
+	}
+
 }
 /* USER CODE END 4 */
 

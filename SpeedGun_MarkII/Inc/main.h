@@ -58,13 +58,12 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define JOY_centre_Pin GPIO_PIN_0
-#define JOY_centre_GPIO_Port GPIOA
-#define JOY_centre_EXTI_IRQn EXTI0_IRQn
-#define LED_red_Pin GPIO_PIN_2
-#define LED_red_GPIO_Port GPIOB
-#define LED_green_Pin GPIO_PIN_8
-#define LED_green_GPIO_Port GPIOE
+#define KEY_Pin GPIO_PIN_0
+#define KEY_GPIO_Port GPIOA
+#define KEY_EXTI_IRQn EXTI0_IRQn
+#define radar_squarewave_Pin GPIO_PIN_6
+#define radar_squarewave_GPIO_Port GPIOA
+#define radar_squarewave_EXTI_IRQn EXTI9_5_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
