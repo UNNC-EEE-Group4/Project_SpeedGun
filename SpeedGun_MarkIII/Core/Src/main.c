@@ -124,6 +124,7 @@ int main(void)
     {
     	char msg2display[10];
     	sprintf(msg2display,"%d",time_interval);
+    	BSP_LCD_GLASS_Clear();
     	BSP_LCD_GLASS_DisplayString(&msg2display);
     }
     //else BSP_LCD_GLASS_DisplayString("test");
