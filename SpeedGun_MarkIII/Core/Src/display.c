@@ -19,17 +19,8 @@ void gui(void)
                             "**********************************************************************************"};
     for (int i = 0; i < 9; i++)
     {
-        uart_print(ch_gui[i]);
+        printf("%s\n", ch_gui[i]);
     }
-    uart_print("Bonjour!");
-    uart_print("Press RIGHT joystick button to continue...");
-    return;
-}
-
-void uart_print(char msg2uart[])
-{
-    int len = strlen(msg2uart);
-    HAL_UART_Transmit(&huart2, "\n", 3, 0xffff);
-    HAL_UART_Transmit(&huart2, msg2uart, len, 0xffff);
+    printf("Bonjour!\nPress RIGHT joystick button to continue...\n");
     return;
 }

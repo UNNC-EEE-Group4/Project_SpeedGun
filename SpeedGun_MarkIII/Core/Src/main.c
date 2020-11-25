@@ -33,6 +33,7 @@
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
 #include "display.h"
+#include "communication.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -108,7 +109,6 @@ int main(void) {
 	/* USER CODE BEGIN 2 */
 	HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 	BSP_LCD_GLASS_Init();
-	//BSP_LCD_GLASS_DisplayString("test");
 	HAL_TIM_Base_Start_IT(&htim3);
 
 	//user interface
@@ -123,12 +123,11 @@ int main(void) {
 
 		/* USER CODE BEGIN 3 */
 		if (!flag_stopwatch && time_interval) {
-			char msg2display[10], msg2uart[100];
+			char msg2display[10];
 			sprintf(msg2display, "%d", time_interval);
-			sprintf(msg2uart, "Time Interval: %d ms", time_interval);
+			printf("Time Interval: %d ms\n", time_interval);
 			BSP_LCD_GLASS_Clear();
 			BSP_LCD_GLASS_DisplayString(&msg2display);
-			uart_print(msg2uart);
 		}
 	}
 	/* USER CODE END 3 */

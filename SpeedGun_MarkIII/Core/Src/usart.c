@@ -21,19 +21,7 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-#include "stdio.h"
-//redefine printf func so that it can be used to output to USART
-#ifdef __GNUC__
-#define PUTCHAR_PROTOTYPE int _io_putchar(int ch)
-#else
-#define PUTCHAR_PROTOTYPE int fputc(int ch,FILE *f)
-#endif
 
-PUTCHAR_PROTOTYPE
-{
-	HAL_UART_Transmit(&huart2,(uint8_t *)&ch,1,0xFFFF);
-	return ch;
-}
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart2;

@@ -109,7 +109,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			if (flag_lcd) {
 				BSP_LCD_GLASS_Clear();
 				BSP_LCD_GLASS_DisplayString("RUNNING");
-				uart_print("Stopwatch Running...");
+				printf("Stopwatch Running...\n");
 				flag_lcd = 0;
 			}
 		} else {
