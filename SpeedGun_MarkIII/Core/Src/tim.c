@@ -22,7 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 //private includes
-#include "display.h"
+#include "adc.h"
 
 //global variables
 int counter_timer = 0;
@@ -117,6 +117,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			counter_stopwatch = 0;
 			flag_lcd = 1;
 		}
+		HAL_ADC_Start_IT(&hadc1);
 	}
 	return;
 }

@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "i2c.h"
 #include "lcd.h"
 #include "quadspi.h"
@@ -34,6 +35,7 @@
 #include "stdio.h"
 #include "display.h"
 #include "communication.h"
+#include "adc.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,6 +57,7 @@
 /* USER CODE BEGIN PV */
 int flag_stopwatch = 0;
 int time_interval = 0;
+int flag_adc=0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -106,13 +109,16 @@ int main(void) {
 	MX_USART2_UART_Init();
 	MX_USB_HOST_Init();
 	MX_TIM3_Init();
+	MX_ADC1_Init();
 	/* USER CODE BEGIN 2 */
+	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED); //adc calibration
 	HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 	BSP_LCD_GLASS_Init();
 	HAL_TIM_Base_Start_IT(&htim3);
 
 	//user interface
 	gui();
+	//flag_adc=1;
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -175,11 +181,12 @@ void SystemClock_Config(void) {
 	}
 	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC
 			| RCC_PERIPHCLK_USART2 | RCC_PERIPHCLK_SAI1 | RCC_PERIPHCLK_I2C1
-			| RCC_PERIPHCLK_I2C2 | RCC_PERIPHCLK_USB;
+			| RCC_PERIPHCLK_I2C2 | RCC_PERIPHCLK_USB | RCC_PERIPHCLK_ADC;
 	PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
 	PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
 	PeriphClkInit.I2c2ClockSelection = RCC_I2C2CLKSOURCE_PCLK1;
 	PeriphClkInit.Sai1ClockSelection = RCC_SAI1CLKSOURCE_PLLSAI1;
+	PeriphClkInit.AdcClockSelection = RCC_ADCCLKSOURCE_PLLSAI1;
 	PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
 	PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLLSAI1;
 	PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_MSI;
@@ -187,9 +194,9 @@ void SystemClock_Config(void) {
 	PeriphClkInit.PLLSAI1.PLLSAI1N = 24;
 	PeriphClkInit.PLLSAI1.PLLSAI1P = RCC_PLLP_DIV7;
 	PeriphClkInit.PLLSAI1.PLLSAI1Q = RCC_PLLQ_DIV2;
-	PeriphClkInit.PLLSAI1.PLLSAI1R = RCC_PLLR_DIV2;
+	PeriphClkInit.PLLSAI1.PLLSAI1R = RCC_PLLR_DIV8;
 	PeriphClkInit.PLLSAI1.PLLSAI1ClockOut = RCC_PLLSAI1_SAI1CLK
-			| RCC_PLLSAI1_48M2CLK;
+			| RCC_PLLSAI1_48M2CLK | RCC_PLLSAI1_ADC1CLK;
 	if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK) {
 		Error_Handler();
 	}
