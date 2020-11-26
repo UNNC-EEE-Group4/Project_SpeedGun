@@ -57,7 +57,7 @@
 /* USER CODE BEGIN PV */
 int flag_stopwatch = 0;
 int time_interval = 0;
-int flag_adc=0;
+int flag_adc = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -79,7 +79,7 @@ void MX_USB_HOST_Process(void);
  */
 int main(void) {
 	/* USER CODE BEGIN 1 */
-
+	//unsigned char uRx_Data = 0;
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -135,6 +135,10 @@ int main(void) {
 			BSP_LCD_GLASS_Clear();
 			BSP_LCD_GLASS_DisplayString(&msg2display);
 		}
+		//uart rx
+		/*if (HAL_UART_Receive(&huart2, &uRx_Data, 1, 1000) == HAL_OK) {
+		 printf("test");
+		 }*/
 	}
 	/* USER CODE END 3 */
 }
