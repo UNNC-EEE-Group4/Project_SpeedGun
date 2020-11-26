@@ -81,8 +81,6 @@ void Error_Handler(void);
 #define JOY_CENTRE_EXTI_IRQn EXTI0_IRQn
 #define JOY_LEFT_Pin GPIO_PIN_1
 #define JOY_LEFT_GPIO_Port GPIOA
-#define JOY_RIGHT_Pin GPIO_PIN_2
-#define JOY_RIGHT_GPIO_Port GPIOA
 #define JOY_UP_Pin GPIO_PIN_3
 #define JOY_UP_GPIO_Port GPIOA
 #define MFX_WAKEUP_Pin GPIO_PIN_4

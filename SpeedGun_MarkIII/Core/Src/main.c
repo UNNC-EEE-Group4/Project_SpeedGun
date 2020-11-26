@@ -58,6 +58,7 @@
 int flag_stopwatch = 0;
 int time_interval = 0;
 int flag_adc = 0;
+int Value_1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -118,7 +119,7 @@ int main(void) {
 
 	//user interface
 	gui();
-	//flag_adc=1;
+	flag_adc = 1;
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -135,10 +136,7 @@ int main(void) {
 			BSP_LCD_GLASS_Clear();
 			BSP_LCD_GLASS_DisplayString(&msg2display);
 		}
-		//uart rx
-		/*if (HAL_UART_Receive(&huart2, &uRx_Data, 1, 1000) == HAL_OK) {
-		 printf("test");
-		 }*/
+		//printf("ADC Value: %d\r\n", Value_1);
 	}
 	/* USER CODE END 3 */
 }
@@ -244,7 +242,7 @@ void Error_Handler(void) {
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
+	/* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }

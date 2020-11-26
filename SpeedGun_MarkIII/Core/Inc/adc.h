@@ -20,8 +20,7 @@
 #ifndef __adc_H
 #define __adc_H
 #ifdef __cplusplus
-extern "C"
-{
+ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -29,19 +28,19 @@ extern "C"
 
 /* USER CODE BEGIN Includes */
 #include "tim.h"
-    /* USER CODE END Includes */
+/* USER CODE END Includes */
 
-    extern ADC_HandleTypeDef hadc1;
+extern ADC_HandleTypeDef hadc1;
 
-    /* USER CODE BEGIN Private defines */
+/* USER CODE BEGIN Private defines */
 
-    /* USER CODE END Private defines */
+/* USER CODE END Private defines */
 
-    void MX_ADC1_Init(void);
+void MX_ADC1_Init(void);
 
-    /* USER CODE BEGIN Prototypes */
+/* USER CODE BEGIN Prototypes */
     void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *);
-    /* USER CODE END Prototypes */
+/* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
