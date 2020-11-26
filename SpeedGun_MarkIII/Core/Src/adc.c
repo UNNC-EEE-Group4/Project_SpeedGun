@@ -141,17 +141,16 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 }
 
 /* USER CODE BEGIN 1 */
-/*void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 	HAL_ADC_Stop_IT(&hadc1);
 	HAL_TIM_Base_Stop_IT(&htim3);
 	int AD_Value = HAL_ADC_GetValue(&hadc1);
 	Value_1 = (int) (AD_Value * 3.3 * 1000 / 4096);
-	printf("ADC Value: %d\r\n", Value_1);
+	printf("%d\r\n", Value_1);
 	HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 	HAL_TIM_Base_Start_IT(&htim3);
 	return;
 }
-*/
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
