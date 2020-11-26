@@ -40,9 +40,9 @@ void MX_TIM3_Init(void) {
 	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
 
 	htim3.Instance = TIM3;
-	htim3.Init.Prescaler = 79;
+	htim3.Init.Prescaler = 65;
 	htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim3.Init.Period = 999;
+	htim3.Init.Period = 49;
 	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
 	if (HAL_TIM_Base_Init(&htim3) != HAL_OK) {
@@ -99,7 +99,7 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *tim_baseHandle) {
 /* USER CODE BEGIN 1 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim == (&htim3)) {
-		if (counter_timer == 500) {
+		if (counter_timer == 10000) {
 			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 			counter_timer = 0;
 		} else
@@ -113,7 +113,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 				flag_lcd = 0;
 			}
 		} else {
-			time_interval = counter_stopwatch;
+			time_interval = counter_stopwatch / 20;
 			counter_stopwatch = 0;
 			flag_lcd = 1;
 		}

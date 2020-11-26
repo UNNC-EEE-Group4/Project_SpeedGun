@@ -131,7 +131,7 @@ int main(void) {
 		if (!flag_stopwatch && time_interval) {
 			char msg2display[10];
 			sprintf(msg2display, "%d", time_interval);
-			printf("Time Interval: %d ms\n", time_interval);
+			printf("Time Interval: %s ms\n", msg2display);
 			BSP_LCD_GLASS_Clear();
 			BSP_LCD_GLASS_DisplayString(&msg2display);
 		}
@@ -215,7 +215,7 @@ void SystemClock_Config(void) {
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	if (JOY_CENTRE_Pin == GPIO_Pin) {
-		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		//HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 		flag_stopwatch = !flag_stopwatch;
 	}
 	return;

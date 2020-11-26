@@ -27,8 +27,8 @@ extern "C"
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-    /* USER CODE BEGIN Includes */
-
+/* USER CODE BEGIN Includes */
+#include "tim.h"
     /* USER CODE END Includes */
 
     extern ADC_HandleTypeDef hadc1;

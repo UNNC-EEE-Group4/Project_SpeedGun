@@ -1,25 +1,24 @@
 /**
- ******************************************************************************
- * File Name          : ADC.c
- * Description        : This file provides code for the configuration
- *                      of the ADC instances.
- ******************************************************************************
- * @attention
- *
- * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
- * All rights reserved.</center></h2>
- *
- * This software component is licensed by ST under Ultimate Liberty license
- * SLA0044, the "License"; You may not use this file except in compliance with
- * the License. You may obtain a copy of the License at:
- *                             www.st.com/SLA0044
- *
- ******************************************************************************
- */
+  ******************************************************************************
+  * File Name          : ADC.c
+  * Description        : This file provides code for the configuration
+  *                      of the ADC instances.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
+  *
+  ******************************************************************************
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "adc.h"
-#include "tim.h"
 
 /* USER CODE BEGIN 0 */
 extern int flag_adc;
@@ -34,7 +33,7 @@ void MX_ADC1_Init(void)
     ADC_ChannelConfTypeDef sConfig = {0};
 
     /** Common config
-	 */
+  */
     hadc1.Instance = ADC1;
     hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
     hadc1.Init.Resolution = ADC_RESOLUTION_12B;
@@ -55,14 +54,14 @@ void MX_ADC1_Init(void)
         Error_Handler();
     }
     /** Configure the ADC multi-mode
-	 */
+  */
     multimode.Mode = ADC_MODE_INDEPENDENT;
     if (HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) != HAL_OK)
     {
         Error_Handler();
     }
     /** Configure Regular Channel
-	 */
+  */
     sConfig.Channel = ADC_CHANNEL_1;
     sConfig.Rank = ADC_REGULAR_RANK_1;
     sConfig.SamplingTime = ADC_SAMPLETIME_24CYCLES_5;
@@ -89,8 +88,8 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef *adcHandle)
 
         __HAL_RCC_GPIOC_CLK_ENABLE();
         /**ADC1 GPIO Configuration
-		 PC0     ------> ADC1_IN1
-		 */
+    PC0     ------> ADC1_IN1
+    */
         GPIO_InitStruct.Pin = GPIO_PIN_0;
         GPIO_InitStruct.Mode = GPIO_MODE_ANALOG_ADC_CONTROL;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -117,8 +116,8 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef *adcHandle)
         __HAL_RCC_ADC_CLK_DISABLE();
 
         /**ADC1 GPIO Configuration
-		 PC0     ------> ADC1_IN1
-		 */
+    PC0     ------> ADC1_IN1
+    */
         HAL_GPIO_DeInit(GPIOC, GPIO_PIN_0);
 
         /* ADC1 interrupt Deinit */
@@ -138,6 +137,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
     float Value_1 = (float)(AD_Value * 3.3 / 4096);
     if (flag_adc)
         printf("ADC Value: %.4f\r\n", Value_1);
+    HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
     HAL_TIM_Base_Start_IT(&htim3);
     return;
 }
