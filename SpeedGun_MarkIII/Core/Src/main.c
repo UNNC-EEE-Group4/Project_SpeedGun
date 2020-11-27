@@ -133,11 +133,11 @@ int main(void) {
 		/* USER CODE BEGIN 3 */
 //		if (!flag_adc) {
 //			for (int i = 0; i < 1024; i++)
-//				printf("%d\n", Value_2[i]);
+////				printf("%d\n", Value_2[i]);
 //			flag_adc = 1;
 //		}
 		//comp
-		printf("freq:%dHz speed:\n", freq_comp);
+		printf("freq:%dHz speed:%dkmph\n", freq_comp, freq_comp * 513 / 10000);
 	}
 	/* USER CODE END 3 */
 }
