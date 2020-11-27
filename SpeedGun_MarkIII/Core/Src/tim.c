@@ -99,9 +99,9 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *tim_baseHandle) {
 /* USER CODE BEGIN 1 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	//adc
-	if (flag_adc)
-		HAL_ADC_Start_IT(&hadc1);
-	return;
+//	if (flag_adc)
+//		HAL_ADC_Start_IT(&hadc1);
+//	return;
 }
 /* USER CODE END 1 */
 

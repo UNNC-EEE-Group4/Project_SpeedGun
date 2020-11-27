@@ -20,7 +20,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
-#include "comp.h"
 #include "i2c.h"
 #include "lcd.h"
 #include "quadspi.h"
@@ -111,7 +110,6 @@ int main(void) {
 	MX_USB_HOST_Init();
 	MX_TIM3_Init();
 	MX_ADC1_Init();
-	MX_COMP2_Init();
 	/* USER CODE BEGIN 2 */
 	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED); //adc calibration
 	BSP_LCD_GLASS_Init();
@@ -128,11 +126,11 @@ int main(void) {
 		MX_USB_HOST_Process();
 
 		/* USER CODE BEGIN 3 */
-		if (!flag_adc) {
-			for (int i = 0; i < 1024; i++)
-				printf("%d\n", Value_2[i]);
-			flag_adc = 1;
-		}
+//		if (!flag_adc) {
+//			for (int i = 0; i < 1024; i++)
+//				printf("%d\n", Value_2[i]);
+//			flag_adc = 1;
+//		}
 	}
 	/* USER CODE END 3 */
 }

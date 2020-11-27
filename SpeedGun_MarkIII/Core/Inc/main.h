@@ -195,6 +195,8 @@ void Error_Handler(void);
 #define SEG11_GPIO_Port GPIOB
 #define SEG12_Pin GPIO_PIN_5
 #define SEG12_GPIO_Port GPIOB
+#define COMP_Pin GPIO_PIN_6
+#define COMP_GPIO_Port GPIOB
 #define GYRO_INT2_Pin GPIO_PIN_8
 #define GYRO_INT2_GPIO_Port GPIOB
 #define COM3_Pin GPIO_PIN_9

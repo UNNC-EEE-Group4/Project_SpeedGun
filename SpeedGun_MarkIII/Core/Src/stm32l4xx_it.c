@@ -58,7 +58,6 @@
 /* External variables --------------------------------------------------------*/
 extern HCD_HandleTypeDef hhcd_USB_OTG_FS;
 extern ADC_HandleTypeDef hadc1;
-extern COMP_HandleTypeDef hcomp2;
 extern TIM_HandleTypeDef htim3;
 extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
@@ -268,20 +267,6 @@ void USART2_IRQHandler(void)
   /* USER CODE BEGIN USART2_IRQn 1 */
 
   /* USER CODE END USART2_IRQn 1 */
-}
-
-/**
-  * @brief This function handles COMP1 and COMP2 interrupts through EXTI lines 21 and 22.
-  */
-void COMP_IRQHandler(void)
-{
-  /* USER CODE BEGIN COMP_IRQn 0 */
-
-  /* USER CODE END COMP_IRQn 0 */
-  HAL_COMP_IRQHandler(&hcomp2);
-  /* USER CODE BEGIN COMP_IRQn 1 */
-
-  /* USER CODE END COMP_IRQn 1 */
 }
 
 /**
