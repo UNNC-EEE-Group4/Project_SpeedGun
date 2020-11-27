@@ -30,6 +30,7 @@ extern int Value_1;
 extern int Value_2[2048];
 extern int flag_adc;
 extern int counter_adc;
+extern int counter_timer;
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim3;
@@ -71,7 +72,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *tim_baseHandle) {
 		__HAL_RCC_TIM3_CLK_ENABLE();
 
 		/* TIM3 interrupt Init */
-		HAL_NVIC_SetPriority(TIM3_IRQn, 1, 3);
+		HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
 		HAL_NVIC_EnableIRQ(TIM3_IRQn);
 		/* USER CODE BEGIN TIM3_MspInit 1 */
 
@@ -102,6 +103,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 //	if (flag_adc)
 //		HAL_ADC_Start_IT(&hadc1);
 //	return;
+	//comp
+	counter_timer++;
 }
 /* USER CODE END 1 */
 

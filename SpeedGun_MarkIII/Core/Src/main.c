@@ -36,6 +36,8 @@
 #include "display.h"
 #include "communication.h"
 #include "adc.h"
+//#include "math.h"
+//#include "arm_math.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,6 +61,9 @@ int Value_1;
 int Value_2[2048];
 int flag_adc = 0;
 int counter_adc = 1;
+int counter_timer = 0;
+int counter_comp = 0;
+int freq_comp = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -131,6 +136,8 @@ int main(void) {
 //				printf("%d\n", Value_2[i]);
 //			flag_adc = 1;
 //		}
+		//comp
+		printf("freq:%dHz speed:\n", freq_comp);
 	}
 	/* USER CODE END 3 */
 }
@@ -205,9 +212,14 @@ void SystemClock_Config(void) {
 
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	if (JOY_CENTRE_Pin == GPIO_Pin) {
-		//HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-
+	if (COMP_Pin == GPIO_Pin) {
+		HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+		counter_comp++;
+		if (counter_timer >= 20010) {
+			freq_comp = counter_comp / 1;
+			counter_comp = 0;
+			counter_timer = 0;
+		}
 	}
 	return;
 }
