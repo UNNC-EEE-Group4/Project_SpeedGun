@@ -36,8 +36,8 @@
 #include "display.h"
 #include "communication.h"
 #include "adc.h"
-//#include "math.h"
-//#include "arm_math.h"
+#include "arm_math.h"
+#include "arm_const_structs.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,7 +58,7 @@
 
 /* USER CODE BEGIN PV */
 int Value_1;
-int Value_2[2048];
+int Value_2[5000];
 int flag_adc = 0;
 int counter_adc = 1;
 int counter_timer = 0;
@@ -131,13 +131,17 @@ int main(void) {
 		MX_USB_HOST_Process();
 
 		/* USER CODE BEGIN 3 */
-//		if (!flag_adc) {
-//			for (int i = 0; i < 1024; i++)
-////				printf("%d\n", Value_2[i]);
-//			flag_adc = 1;
-//		}
+		if (!flag_adc) {
+			int freq_fft = dfft();
+			for (int i = 0; i < 4096; i++) {
+//				printf("%d\n", Value_2[i]);
+				flag_adc = 1;
+			}
+			printf("freq:%dHz speed:%dkmph\n", freq_fft * 8014 / 8000,
+					freq_fft * 8014 / 8000 * 513 / 10000);
+		}
 		//comp
-		printf("freq:%dHz speed:%dkmph\n", freq_comp, freq_comp * 513 / 10000);
+//		printf("freq:%dHz speed:%dkmph\n", freq_comp, freq_comp * 513 / 10000);
 	}
 	/* USER CODE END 3 */
 }
@@ -212,16 +216,48 @@ void SystemClock_Config(void) {
 
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	if (COMP_Pin == GPIO_Pin) {
-		HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
-		counter_comp++;
-		if (counter_timer >= 20010) {
-			freq_comp = counter_comp / 1;
-			counter_comp = 0;
-			counter_timer = 0;
-		}
+//	if (COMP_Pin == GPIO_Pin) {
+//		HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+//		counter_comp++;
+//		if (counter_timer >= 20010) {
+//			freq_comp = counter_comp / 1;
+//			counter_comp = 0;
+//			counter_timer = 0;
+//		}
+//	}
+//	return;
+}
+//fft
+int dfft() {
+	int fft_dot = 4096;
+	float32_t complex[fft_dot * 2];
+	float32_t output[fft_dot];
+	float32_t maxvalue = 0.0f;
+	uint32_t maxindex = 0;
+
+	for (uint16_t i = 0; i < (fft_dot * 2); i += 2) {
+		complex[i] = (float32_t) Value_2[i / 2];
+		complex[i + 1] = 0.0f;
 	}
-	return;
+
+	arm_cfft_f32(&arm_cfft_sR_f32_len4096, complex, 0, 1); // 1024 4096-------
+	arm_cmplx_mag_f32(complex, output, fft_dot);
+	output[0] = 0.0f; //remove DC value
+
+	float32_t unit_freq = (float32_t) 5000 / fft_dot; //2500 is timer freq
+
+	//remove other freq, only leave the freq with max amplitude
+//    for (uint16_t i=0; i< (FREQ_MIN / unit_freq); i++)
+//    {
+//        output[i]=0.0f;
+//    }
+//    for (uint16_t i= (FREQ_MAX / unit_freq); i< fft_dot; i++)
+//    {
+//        output[i]=0.0f;
+//    }
+
+	arm_max_f32(output, fft_dot / 2, &maxvalue, &maxindex);
+	return (int) unit_freq * maxindex * 1.95;
 }
 /* USER CODE END 4 */
 

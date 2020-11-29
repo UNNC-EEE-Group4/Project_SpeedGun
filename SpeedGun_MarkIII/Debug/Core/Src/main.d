@@ -44,7 +44,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/spi.h ../Core/Inc/tim.h ../Core/Inc/usart.h \
  ../USB_HOST/App/usb_host.h ../Core/Inc/gpio.h ../Core/Inc/display.h \
  ../Core/Inc/usart.h ../Core/Inc/communication.h \
- ../Core/Inc/communication.h
+ ../Core/Inc/communication.h \
+ C:/Users/YuJin/STM32Cube/Repository/STM32Cube_FW_L4_V1.16.0/Drivers/CMSIS/DSP/Include/arm_math.h \
+ ../Drivers/CMSIS/Include/cmsis_compiler.h \
+ C:/Users/YuJin/STM32Cube/Repository/STM32Cube_FW_L4_V1.16.0/Drivers/CMSIS/DSP/Include/arm_const_structs.h \
+ C:/Users/YuJin/STM32Cube/Repository/STM32Cube_FW_L4_V1.16.0/Drivers/CMSIS/DSP/Include/arm_math.h \
+ C:/Users/YuJin/STM32Cube/Repository/STM32Cube_FW_L4_V1.16.0/Drivers/CMSIS/DSP/Include/arm_common_tables.h
 
 ../Core/Inc/main.h:
 
@@ -159,3 +164,13 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/communication.h:
 
 ../Core/Inc/communication.h:
+
+C:/Users/YuJin/STM32Cube/Repository/STM32Cube_FW_L4_V1.16.0/Drivers/CMSIS/DSP/Include/arm_math.h:
+
+../Drivers/CMSIS/Include/cmsis_compiler.h:
+
+C:/Users/YuJin/STM32Cube/Repository/STM32Cube_FW_L4_V1.16.0/Drivers/CMSIS/DSP/Include/arm_const_structs.h:
+
+C:/Users/YuJin/STM32Cube/Repository/STM32Cube_FW_L4_V1.16.0/Drivers/CMSIS/DSP/Include/arm_math.h:
+
+C:/Users/YuJin/STM32Cube/Repository/STM32Cube_FW_L4_V1.16.0/Drivers/CMSIS/DSP/Include/arm_common_tables.h:

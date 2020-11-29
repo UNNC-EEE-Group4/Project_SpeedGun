@@ -59,7 +59,7 @@ main-build: SpeedGun_MarkIII.elf secondary-outputs
 
 # Tool invocations
 SpeedGun_MarkIII.elf: $(OBJS) $(USER_OBJS) C:\Users\YuJin\Desktop\eee\PEP\Electronic\Session2\stm32_ws\SpeedGun_MarkIII\STM32L476VGTX_FLASH.ld
-	arm-none-eabi-gcc -o "SpeedGun_MarkIII.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\YuJin\Desktop\eee\PEP\Electronic\Session2\stm32_ws\SpeedGun_MarkIII\STM32L476VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SpeedGun_MarkIII.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "SpeedGun_MarkIII.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\YuJin\Desktop\eee\PEP\Electronic\Session2\stm32_ws\SpeedGun_MarkIII\STM32L476VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SpeedGun_MarkIII.map" -Wl,--gc-sections -static -L"C:\Users\YuJin\STM32Cube\Repository\STM32Cube_FW_L4_V1.16.0\Drivers\CMSIS\DSP\Lib\GCC" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
